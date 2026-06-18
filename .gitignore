@@ -1,0 +1,11 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+demo-ec2-key
+demo-ec2-key.pub
+
+*.pem
+terraform.tfvars
+terraform.tfstate
