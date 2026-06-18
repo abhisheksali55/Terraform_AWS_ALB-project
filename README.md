@@ -19,19 +19,28 @@ Traffic is distributed across multiple EC2 instances through the Application Loa
 
 ## Architecture
 
-Internet
-|
-v
-Application Load Balancer
-|
-v
-Target Group
-|
-+------------------+
-|                  |
-v                  v
-EC2 Instance 1     EC2 Instance 2
-(Nginx)            (Nginx)
+```text
+                Internet
+                    |
+                    v
+        +----------------------+
+        | Application Load     |
+        | Balancer (ALB)       |
+        +----------------------+
+                    |
+                    v
+        +----------------------+
+        |     Target Group     |
+        +----------------------+
+               /        \
+              /          \
+             v            v
+
+    +----------------+  +----------------+
+    | EC2 Instance 1 |  | EC2 Instance 2 |
+    |     Nginx      |  |     Nginx      |
+    +----------------+  +----------------+
+```
 
 ---
 
@@ -60,15 +69,14 @@ EC2 Instance 1     EC2 Instance 2
 
 ## Project Structure
 
+```text
 .
 ├── provider.tf
 ├── main.tf
 ├── target-gp.tf
-├── script/
-│   ├── install-nginx.sh
-│   └── install-nginx-2.sh
 ├── outputs.tf
 └── README.md
+```
 
 ---
 
@@ -76,34 +84,43 @@ EC2 Instance 1     EC2 Instance 2
 
 ### Initialize Terraform
 
+```bash
 terraform init
+```
 
 ### Validate Configuration
 
+```bash
 terraform validate
+```
 
 ### Preview Changes
 
+```bash
 terraform plan
+```
 
 ### Deploy Infrastructure
 
+```bash
 terraform apply
+```
 
 ### Destroy Infrastructure
 
+```bash
 terraform destroy
+```
 
 ---
 
 ## Verification
 
-After deployment:
-
-1. Copy the ALB DNS name from Terraform output.
-2. Open the DNS URL in a browser.
-3. Refresh multiple times.
-4. Requests should be distributed between both Nginx servers.
+1. Deploy the infrastructure using Terraform.
+2. Copy the ALB DNS name from Terraform output.
+3. Open the DNS URL in a browser.
+4. Refresh multiple times.
+5. Requests should be distributed between both Nginx servers.
 
 Example:
 
@@ -116,19 +133,19 @@ This confirms that load balancing is working correctly.
 
 ## Learning Outcomes
 
-Through this project I learned:
-
-* Terraform fundamentals
-* AWS EC2 provisioning
-* Security Group management
-* Application Load Balancer configuration
+* Terraform Fundamentals
+* AWS EC2 Provisioning
+* Security Group Management
+* Application Load Balancer Configuration
 * Target Groups and Health Checks
-* Infrastructure Automation using Terraform
+* Infrastructure Automation Using Terraform
 
 ---
 
 ## Author
 
-Abhishek Sali
+**Abhishek Sali**
+
+DevOps & Cloud Computing Learner
 
 DevOps & Cloud Computing Learner
